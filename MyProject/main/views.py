@@ -141,12 +141,14 @@ def home(request):
     banners = Banner.objects.filter().select_related().values_list('movie__id', 'movie__movie_name', 'url', named=True)
     return render(request,"main/booking/index.html", context={'films': movies, 'banners': banners})
 
+
 def movie_detail(request,id):
     context = {}
     context['film'] = Film.objects.get(id = id) 
     context ['showtimes'] = Show.objects.filter(movie=id,end_date__gte=date.today()).all().values_list('id', 'showtime',
                                                                                                        named=True)
     return render(request,"movie_detail.html",context)
+
 
 @user_passes_test(user_login_required, login_url='/accounts/usersignin')
 def show_select(request):
@@ -227,6 +229,7 @@ def checkout(request):
         sendEmail(request,message)
     return render(request,"checkout.html",context)
 
+
 @user_passes_test(user_login_required, login_url='/accounts/usersignin')
 def userbookings(request):
     msg = ""
@@ -240,6 +243,7 @@ def userbookings(request):
         'msg': msg
     }
     return render(request,"bookings.html",context)
+
 
 @user_passes_test(user_login_required, login_url='/accounts/usersignin')
 def cancelbooking(request,id):
