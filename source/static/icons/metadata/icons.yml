@@ -6948,7 +6948,7 @@ home:
   search:
     terms:
       - house
-      - main
+      - booking
   styles:
     - solid
   unicode: f015
