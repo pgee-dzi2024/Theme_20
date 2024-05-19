@@ -10,13 +10,9 @@
 {% block content %}
 <div class="container text-success text-center" id="movie-content">
     <h1>Успешно са запазени билети</h1>
-    <h2> Your show info is
-        {% if show %}
-                {{ show.showtime }} |
-                {{ show.movie }}
-        {% endif %} </h2>
-    <h2> Вашата прожекция е {% if sdate %} {{ sdate }} {% endif %} </h2>
-    <h2> Вашите билет са {% if seats %} {{ seats }} {% endif %} бр. </h2>
+    <h2> Филм: {% if show %} {{ show.movie }} {% endif %} </h2>
+    <h2> Начало в {% if show %}{{ show.showtime }}{% endif %} на {% if sdate %} {{ sdate }} {% endif %} </h2>
+    <h2> Вашите места са {% if seats %} {{ seats }},&nbsp; {% endif %}</h2>
     <a class="btn btn-primary" href="/mybookings">Към резервации</a>
 </div>
 {% endblock %}

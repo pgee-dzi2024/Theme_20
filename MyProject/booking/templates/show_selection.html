@@ -34,7 +34,7 @@
 {% block content %}
 <div class="container" id="movie-content">
     <div class="row">
-        <h2 class="text-primary">Изберете час</h2>
+        <h2 class="text-primary">Прожекции:</h2>
     </div>
     <div class="row">
         <form method="get" action="#" id="dateform">
@@ -54,9 +54,7 @@
             {% if films %}
                 {% for key, value in films.items %} 
                     <div class="row" >
-                        <div class="col-md-2">
-                          <img class="img-fluid "  style="margin:10px;" src="{{value|get:"url"}}">
-                        </div>
+
                         <div class="col-md-10">
                           <h1>{{ key }}</h1>
                           <div class="form-group">

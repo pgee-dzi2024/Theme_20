@@ -28,7 +28,7 @@ class showForm(forms.ModelForm):
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
-            'showtime':forms.TimeInput(attrs={'type': 'time'}),
+            'showtime': forms.TimeInput(attrs={'type': 'time'}),
             # 'movie':forms.Select(attrs={'class': "form-control"},choices=film.objects.all())
         }
     def __str__(self):

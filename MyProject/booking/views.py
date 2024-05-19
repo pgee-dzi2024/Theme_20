@@ -19,11 +19,13 @@ def home(request):
     banners = banner.objects.all()
     return render(request,"index.html", context={'films': movies,'banners':banners})
 
+
 def movie_detail(request,id):
     context = {}
     context['film'] = Film.objects.get(id = id)
     context ['showtimes'] = show.objects.filter(movie=id,end_date__gte=date.today()).all().values_list('id', 'showtime',named=True)
     return render(request,"movie_detail.html",context)
+
 
 @user_passes_test(user_login_required, login_url='/accounts/usersignin')
 def show_select(request):
@@ -50,9 +52,6 @@ def show_select(request):
 
 
 def bookedseats(request):
-    """
-    AJAX seat booking info retrival view funciton
-    """
     if request.method == 'GET':
            show_id = request.GET['show_id']
            show_date = request.GET['show_date']
@@ -97,7 +96,7 @@ def checkout(request):
         showinfo = show.objects.get(id=show_id)
         total = showinfo.price*num_seats
         booking.objects.create(booking_code="Random",user=request.user,show=showinfo,show_date=show_date,booked_date=datetime.now(timezone.utc),  seat_num=seats, num_seats=num_seats,total = total)        
-        context["film"] = film.objects.get(movie_name = showinfo.movie) 
+        context["film"] = Film.objects.get(movie_name = showinfo.movie)
         context['sdate'] = show_date
         context['seats'] = seats
         context['show'] = showinfo

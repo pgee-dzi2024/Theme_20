@@ -35,7 +35,7 @@
             {% comment %} Raw Queryset    {{ showtimes }} {% endcomment %}
             {% if msg %}
             <div class="alert alert-success alert-dismissible fade show" id="messageblk" role="alert">
-              <strong>Holy guacamole!</strong> {{ msg }}
+              <strong>Успешна операция:</strong> {{ msg }}
               <button type="button" class="btn-close messagealert" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endif %}
@@ -46,7 +46,6 @@
             <table class="table table-dark table-hover" class="tab">
                 <thead>
                   <tr>
-                    <th scope="col" class="tab" ></th>
                     <th scope="col" class="tab">Дата</th>
                     <th scope="col" class="tab">Филм</th>
                     <th scope="col" class="tab">Час</th>
@@ -60,12 +59,11 @@
                  
                     {% for row in data %}
                   <tr>
-                    <td style="padding:5px" class="tab"><img src="{{ row.show__movie__url }}"  style="height:50px;width:40px;"></td>
                     <td class="tab">{{ row.show_date }}</td>
                     <td class="tab">{{ row.show__movie__movie_name }}</td>
                     <td class="tab">{{ row.show__showtime }}</td>
                     <td class="tab">{{ row.seat_num }}</td>
-                    <td class="tab">${{ row.total }}</td>
+                    <td class="tab">{{ row.total }} лв.</td>
                     <td class="tab">{{ row.booked_date|tdiff }}</td>
                     <td class="tab"><a type="button" class="btn bstatusbtn" data-id="{{ row.id }}" >
                       {{ row.show_date|bstatus }}

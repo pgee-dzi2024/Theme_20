@@ -29,8 +29,8 @@ class banner(models.Model):
 
 class show(models.Model):
     movie = models.ForeignKey(Film,verbose_name="Movie",on_delete=models.CASCADE,blank=True,null=True)
-    start_date = models.DateField(verbose_name="Start Date",null=True)
-    end_date = models.DateField(verbose_name="End Date",null=True)
+    start_date = models.DateField(verbose_name="Start Date", null=True)
+    end_date = models.DateField(verbose_name="End Date", null=True)
     price = models.PositiveIntegerField(verbose_name="Ticket Price")
     showtime = models.TimeField(verbose_name="Showtime",auto_now=False, auto_now_add=False,blank=True, null=True)
     # modifiedby = models.OneToOneField(Account,on_delete=models.SET_NULL)

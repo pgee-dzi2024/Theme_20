@@ -34,7 +34,6 @@
                   <th>От дата</th>
                   <th>До дата</th>
                   <th>Цена</th>
-                  <th>Снимка</th>
                   <th>Действие</th>
               </tr>
           </thead>
@@ -45,7 +44,6 @@
                   <th>От дата</th>
                   <th>До дата</th>
                   <th>Цена</th>
-                  <th>Снимка</th>
                   <th>Действие</th>
               </tr>
           </tfoot>
@@ -58,7 +56,6 @@
                   <td >{{ show.start_date }}</td>
                   <td >{{ show.end_date }}</td>
                   <td>{{ show.price }}</td>
-                  <td ><img src="{{ show.movie.url }}"  style="height:50px;width:40px;"></td>
                   <td>
                       <a class="btn btn-warning" href="/admin/updateshow/{{ show.id }}">Промени</a>
                       <a class="btn btn-danger" href="/admin/deleteshow/{{ show.id }}" >Премахни</a>
