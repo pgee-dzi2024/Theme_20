@@ -1,10 +1,13 @@
+from django.conf import settings
+from django.conf.urls.static import static
+
 from . import views
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('', views.index, name='index'), 
-    path('users', views.users, name='users'), 
+    path('users', views.Users, name='users'),
     # CRUD Film
     path('movies', views.movies, name='movies'),
     path('createfilm', views.FilmCreate.as_view(), name='film-create'),
@@ -21,3 +24,6 @@ urlpatterns = [
     path('updateshow/<pk>', views.ShowUpdate.as_view(), name='show-update'),
     path('deleteshow/<pk>', views.ShowDelete.as_view(), name='show-delete'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

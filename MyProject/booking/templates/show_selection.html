@@ -4,7 +4,7 @@
 
 <!-- Header -->
 {% block title %}
-        <title>Book a show</title>
+        <title>BookMyTicket</title>
         <link rel="stylesheet" href="{% static 'css/seat_selection2.css' %}">
         
         <style>
@@ -33,19 +33,16 @@
 <!-- Content -->
 {% block content %}
 <div class="container" id="movie-content">
-
-  
     <div class="row">
-        <h2 class="text-primary"  >Select Showtime</h2>
+        <h2 class="text-primary">Изберете час</h2>
     </div>
     <div class="row">
         <form method="get" action="#" id="dateform">
             <div class="form-group row">
-                <label for="selectdate" class="text-secondary col-sm-2 col-form-label">Select Date</label>
+                <label for="selectdate" class="text-secondary col-sm-2 col-form-label">Изберете дата</label>
                 <div class="col-sm-4">
                 <input type="date"  name="date" class="form-control datebox"  value="{% if date %}{{ date }}{% else %}{{"%Y-%m-%d"|cdateadd:"1" }}{% endif %}"   min="{{ "%Y-%m-%d"|cdateadd:"1" }}" max="{{ "%Y-%m-%d"|cdateadd:"30" }}" id="selectdate" value="">
                 </div>
-                
             </div>
             <hr>
         </form>
@@ -53,7 +50,7 @@
     <div class="row">
         <!-- results -->
         <div class="container col-md-8 results" >
-          <p class="text-secondary">Movies showing on <b>{{ date }}</b> </p>
+          <p class="text-secondary">Прожекции за  <b>{{ date }}</b> </p>
             {% if films %}
                 {% for key, value in films.items %} 
                     <div class="row" >
@@ -64,7 +61,8 @@
                           <h1>{{ key }}</h1>
                           <div class="form-group">
                             {% for showid,time in value|get:"showtimes"|items %}
-                              <a class="btn btn-primary showtimebtn" style="padding-left:20px;padding-right:20px;" data-showid="{{ showid }}" data-toggle="modal" data-target="#exampleModalCenter22" href="#">{{ time|tformat:"%I:%M %p" }}</a>
+                              <a class="btn btn-primary showtimebtn" style="padding-left:20px;padding-right:20px;" data-showid="{{ showid }}"
+                                 data-toggle="modal" data-target="#exampleModalCenter22" href="#">{{ time|tformat:"%I:%M %p" }}</a>
                             {% endfor %}
                           </div>
                         </div>
@@ -83,7 +81,7 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" >
                   <div class="modal-header" style="border-bottom: None;">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Book tickets</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Билети</h5>
                     <button type="button" style="color:white;" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -179,15 +177,15 @@
                       <ul style="display: flex;  justify-content: space-between;  list-style-type: none;  background: rgba(0,0,0,0.1);  padding: 5px 10px;  border-radius: 5px;  color: #777;">
                         <li style="display: flex;  align-items: center;  justify-content: center;  margin: 0 10px;">
                           <div style="background-color: #fff;height: 12px;width: 15px;margin: 3px;border-top-left-radius: 10px;border-top-right-radius: 10px;"></div>
-                          <small>Occupied</small>
+                          <small>Заето</small>
                         </li>
                         <li style="display: flex;  align-items: center;  justify-content: center;  margin: 0 10px;">
                           <div style="background-color: #444451;height: 12px;width: 15px;margin: 3px;border-top-left-radius: 10px;border-top-right-radius: 10px;" ></div>
-                          <small>Available</small>
+                          <small>Свободно</small>
                         </li>
                         <li style="display: flex;  align-items: center;  justify-content: center;  margin: 0 10px;">
                           <div style="background-color: #2ecc71;height: 12px;width: 15px;margin: 3px;border-top-left-radius: 10px;border-top-right-radius: 10px;" ></div>
-                          <small>Selected</small>
+                          <small>Избрано</small>
                         </li>    
                       </ul>
                       
@@ -202,8 +200,8 @@
                             <input type="hidden" type="text" name="seats" id="seats_input" />
                             <input type="hidden" type="text" name="showid" id="show_id" />
                     </form>
-                      <button type="button" class="btn btn-primary btn-block bookticketsbtn">Book Tickets</button>
-                      <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary btn-block bookticketsbtn">Вземи билети</button>
+                      <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Отказ</button>
                           
                   </div>
                 </div>
@@ -213,7 +211,7 @@
 {% endblock content %}
 
 <!-- JS -->
-{% block js%}
+{% block js %}
 
 <script >
   $( document ).ready(function() {
@@ -312,4 +310,4 @@
     });
 });
 </script>
-{% endblock js%}
+{% endblock js %}

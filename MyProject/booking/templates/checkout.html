@@ -4,20 +4,19 @@
 
 <!-- Header -->
 {% block title %}
-<title> Checkout </title>
+<title> BookMyTicket </title>
 {% endblock %}
 
 {% block content %}
 <div class="container text-success text-center" id="movie-content">
-    <h1>Tickets Booked Successfully</h1>
-<h2> Your show info is 
-    {% if show %} 
-            {{ show.showtime }} |
-            {{ show.movie }} 
-
-    {% endif %} </h2>
-<h2> Your show is on {% if sdate %} {{ sdate }} {% endif %} </h2>
-<h2> Your ticket are {% if seats %} {{ seats }} {% endif %} </h2>
-<a class="btn btn-primary" href="/mybookings" >Go to Bookings<a>
+    <h1>Успешно са запазени билети</h1>
+    <h2> Your show info is
+        {% if show %}
+                {{ show.showtime }} |
+                {{ show.movie }}
+        {% endif %} </h2>
+    <h2> Вашата прожекция е {% if sdate %} {{ sdate }} {% endif %} </h2>
+    <h2> Вашите билет са {% if seats %} {{ seats }} {% endif %} бр. </h2>
+    <a class="btn btn-primary" href="/mybookings">Към резервации</a>
 </div>
 {% endblock %}

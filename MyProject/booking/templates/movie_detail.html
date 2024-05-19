@@ -7,7 +7,7 @@
 
 <!-- Header -->
 {% block title %}
-        <title>{{ film.movie_name }} Preview</title>
+        <title>{{ film.movie_name }}</title>
         
         <style>
           .results{
@@ -31,9 +31,9 @@
             
             <div id="movie-poster" class="col-md-4 d-flex justify-content-center ">
                 <div class="card text-center border-0 bgdark" style="width: 18rem;">
-                    <img class="card-img-top imagestyle " src="{{ film.url }}" alt="Card image cap">
+                    <img class="card-img-top imagestyle " src="{{ film.photo.url }}" alt="Card image cap">
                     <div class="card-body">
-                    <a href="/show?date={{ "%Y-%m-%d"|cdateadd:"1" }}" class="btn btn-warning">Get Tickets</a>
+                    <a href="/show?date={{ "%Y-%m-%d"|cdateadd:"1" }}" class="btn btn-warning">Вземи билети</a>
                     </div>
                 </div>
                     
@@ -48,13 +48,13 @@
                 </div>
                 <p class="hidden-xs hidden-sm">
                     {% if showtimes%}
-                    <em class="pull-left">Available at times&nbsp;</em>
+                    <em class="pull-left">Прожекции&nbsp;</em>
                     <br>
                     {% for show in showtimes %}
                     <a href="/show?date={{ "%Y-%m-%d"|cdateadd:"1" }}"  style="padding-left:20px;padding-right:20px;margin-right:10px;" class="btn btn-primary" rel="nofollow"  >{{ show.showtime|tformat:"%I:%M %p" }}</a>
                     {% endfor %}
                     {% else %}
-                    <em class="pull-left">No shows Available, Check later&nbsp;</em>
+                    <em class="pull-left">Не са намерени, проверете по-късно&nbsp;</em>
                     {% endif %}
                 </p>
                 <p>{{ film.movie_plot }}</p>

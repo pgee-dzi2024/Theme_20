@@ -121,7 +121,7 @@
   <div class="container">
     
     <div class="row">
-      <h2 class="text-primary" > Прожекции сега </h2>
+      <h2 class="text-primary" > Филми: </h2>
     </div>
     
     <div class="row"> 
@@ -131,7 +131,7 @@
             <div class="col-md-4">
               <a href="detail/{{ film.id }}">
                 <div class="card card-01 height-fix fitimage2">
-                  <img class="card-img-top fitimage2" src="{{ film.url }}" alt="{{ film.movie_name }} image">
+                  <img class="card-img-top fitimage2" src="{{ film.photo.url }}" alt="{{ film.movie_name }} image">
                   <div class="card-img-overlay"><h4 class="card-title"><strong>{{ film.movie_name }}</strong></h4></div>
                 </div>
               </a>

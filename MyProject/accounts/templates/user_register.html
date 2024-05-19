@@ -15,9 +15,9 @@
 <div class="global-container bgdark">
   <div class="card login-form bgdark" style="border-style: solid;border-color: yellow;">
   <div class="card-body">
-    <h3 class="card-title text-center text-light">User Registration</h3>
+    <h3 class="card-title text-center text-light">Регистрация</h3>
     {% if account %}
-      Account
+      Клиент
     {% endif %}
     <div class="card-text">
       <form method="post">
@@ -25,7 +25,7 @@
             {{form|crispy}}
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
             <div class="sign-up text-light">
-              Already have an account? <a href="/accounts/usersignin">Login here</a>
+              Вече сте регистриран(а)?<br> <a href="/accounts/usersignin">Вход</a>
             </div>
         </form>
     </div>

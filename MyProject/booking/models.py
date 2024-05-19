@@ -3,7 +3,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import AbstractUser
 # from traitlets import default
-from staff.models import  show
+from staff.models import show
 from accounts.models import Account
 from datetime import datetime
 

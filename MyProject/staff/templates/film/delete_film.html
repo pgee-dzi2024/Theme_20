@@ -11,16 +11,16 @@
 
 {% block content %}
 
-<h1 class="mt-4">Movies</h1>
+<h1 class="mt-4">Филми</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="/admin/movies">Movies</a></li>
-    <li class="breadcrumb-item active">Delete Film</li>
+    <li class="breadcrumb-item"><a href="/admin">Обобщена информация</a></li>
+    <li class="breadcrumb-item"><a href="/admin/movies">Филми</a></li>
+    <li class="breadcrumb-item active">Премахни филм</li>
 </ol>
 
 <div class="card mb-4">
   <div class="card-header">
-      <h2 class="my-2">Delete Film</h2>
+      <h2 class="my-2">Премахванее на филм</h2>
   </div>
   <div class="card-body">
         <!--Django Model Form-->
@@ -30,17 +30,17 @@
                   <img class="card-img-top" src="{{ object.url }} " style="width: 18rem;">
               </div>
               <div class="col">
-                  <h3> Film Name : {{ object }}</h3>
-                  <h5> Year: {{ object.movie_year }} </h5>
-                  <p> Language: {{ object.movie_lang }} </p>
+                  <h3> Име на филма : {{ object }}</h3>
+                  <h5> Година: {{ object.movie_year }} </h5>
+                  <p> Език: {{ object.movie_lang }} </p>
               </div>
           </div>
           <div class="row">
             <div class="col">
               <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <button class="btn btn-danger my-4" type="submit">Comfirm Delete</button>
-                <a class="btn btn-primary my-4" href="/admin/movies" >Go Back</a>
+                <button class="btn btn-danger my-4" type="submit">Потвърди премахването</button>
+                <a class="btn btn-primary my-4" href="/admin/movies" >Върни се</a>
               </form>
             </div>
           </div>

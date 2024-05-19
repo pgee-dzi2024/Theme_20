@@ -3,50 +3,50 @@
 {% load utils %}
 
 {% block title %}
-    <title> Shows - Admin </title>
+    <title>BookMyTicket</title>
 {% endblock %}
 
 
 
 {% block content %}
 
-<h1 class="mt-4">Shows</h1>
+<h1 class="mt-4">Прожекции</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-    <li class="breadcrumb-item active">Shows</li>
-    <li class="breadcrumb-item"><a href="/admin/createshow">Add Show</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Обобщена информация</a></li>
+    <li class="breadcrumb-item active">Прожекции</li>
+    <li class="breadcrumb-item"><a href="/admin/createshow">Добави прожекция</a></li>
 </ol>
 
 <div class="card mb-4">
   <div class="card-header">
       <i class="fas fa-table me-1"></i>
-      List of Shows 
+      Списък прожекции
       
 
-      <a class="btn btn-outline-primary"  href="/admin/createshow" align="right">Add Show</a>
+      <a class="btn btn-outline-primary"  href="/admin/createshow" align="right">Добави прожекция</a>
   </div>
   <div class="card-body">
       <table id="datatablesSimple">
           <thead>
               <tr>
-                  <th>Movie</th>
-                  <th>Showtime</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Price</th>
-                  <th>thumbnail</th>
-                  <th>Actions</th>
+                  <th>Филм</th>
+                  <th>Час</th>
+                  <th>От дата</th>
+                  <th>До дата</th>
+                  <th>Цена</th>
+                  <th>Снимка</th>
+                  <th>Действие</th>
               </tr>
           </thead>
           <tfoot>
               <tr>
-                  <th>Movie</th>
-                  <th>Showtime</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Price</th>
-                  <th>thumbnail</th>
-                  <th>Actions</th>
+                  <th>Филм</th>
+                  <th>Час</th>
+                  <th>От дата</th>
+                  <th>До дата</th>
+                  <th>Цена</th>
+                  <th>Снимка</th>
+                  <th>Действие</th>
               </tr>
           </tfoot>
           <tbody>
@@ -60,8 +60,8 @@
                   <td>{{ show.price }}</td>
                   <td ><img src="{{ show.movie.url }}"  style="height:50px;width:40px;"></td>
                   <td>
-                      <a class="btn btn-warning" href="/admin/updateshow/{{ show.id }}">Edit</a>
-                      <a class="btn btn-danger" href="/admin/deleteshow/{{ show.id }}" >Delete</a>
+                      <a class="btn btn-warning" href="/admin/updateshow/{{ show.id }}">Промени</a>
+                      <a class="btn btn-danger" href="/admin/deleteshow/{{ show.id }}" >Премахни</a>
                   </td>
                 </tr>
             {% endfor %}

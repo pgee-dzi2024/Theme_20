@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 from django.db.models import Avg, Count, Min, Sum
 from datetime import date, timedelta
 from .forms import filmForm, showForm
-from .models import film, show, banner
+from .models import Film, show, banner
 
 
 def handler401(request, *args, **argv):
@@ -32,8 +32,7 @@ def base(request):
     return render(request,"admin_base.html")
 
 
-################################################ LOGING VIEWS
-
+#  LOGING VIEWS
 @user_passes_test(staff_required, login_url='/accounts/adminlogin')
 def index(request):
     context = {}
@@ -42,8 +41,12 @@ def index(request):
     b_data = booking.objects.filter(show_date__gte=start_date).values_list('show_date').order_by('show_date').annotate(total_seats=Sum('num_seats'))
     r_data = booking.objects.filter(show_date__gte=start_date).values_list('show_date').order_by('show_date').annotate(total=Sum('total'))
     
-    booking_table = booking.objects.select_related().order_by('-booked_date').values_list('show_date','booked_date','show','total','num_seats','show__movie__movie_name','show__showtime','user__username',named=True)
-    movies_count = film.objects.all().count()
+    booking_table = booking.objects.select_related().order_by('-booked_date').values_list('show_date','booked_date',
+                                                                                          'show', 'total','num_seats',
+                                                                                          'show__movie__movie_name',
+                                                                                          'show__showtime',
+                                                                                          'user__username', named=True)
+    movies_count = Film.objects.all().count()
     users_count = Account.objects.filter(is_staff=False).count()
     bookings_count = booking.objects.all().count()
 
@@ -57,7 +60,7 @@ def index(request):
         # legend of fields: date 0, no of tickets 1
         data_dict[r[0]]=r[1]
     for d in date_labels:
-        if(d not in data_dict.keys()):
+        if (d not in data_dict.keys()):
             data_dict[d]=0
     graph1['dates']=",".join([ x.strftime("%b %d") for x in date_labels])
     graph1['tickets']=[data_dict[x] for x in date_labels ] 
@@ -73,95 +76,94 @@ def index(request):
     graph2['dates']=",".join([ x.strftime("%b %d") for x in date_labels])
     graph2['total']=[data_dict[x] for x in date_labels ] 
 
-
-    context={
-        'graph1':graph1,
-        'graph2':graph2,
-        'tabledata':booking_table,
-        'movies_count':movies_count,
-        'users_count':users_count,
-        'bookings_count':bookings_count
+    context = {
+        'graph1': graph1,
+        'graph2': graph2,
+        'tabledata': booking_table,
+        'movies_count': movies_count,
+        'users_count': users_count,
+        'bookings_count': bookings_count
         }
     
-    return render(request,"dashboard.html",context)
+    return render(request,"dashboard.html", context)
 
 
-# #################### FILM VIEWS #####################################
+# FILM VIEWS
 class FilmCreate(CreateView):
-    template_name = "film/add_film.html";
-    model = film;
-    fields = ['movie_name','movie_lang','movie_genre','movie_year','url','movie_plot'];
-    success_url = reverse_lazy('movies');
+    template_name = "film/add_film.html"
+    model = Film
+    fields = ['movie_name', 'movie_lang', 'movie_genre', 'movie_year', 'photo', 'movie_plot']
+    success_url = reverse_lazy('movies')
 
 
 class FilmUpdate(UpdateView):
-    template_name = "film/edit_film.html";
-    model = film;
-    fields = ['movie_name', 'movie_lang', 'movie_genre','movie_year','url','movie_plot'];
-    success_url = reverse_lazy('movies');
+    template_name = "film/edit_film.html"
+    model = Film
+    fields = ['movie_name', 'movie_lang', 'movie_genre', 'movie_year', 'photo', 'movie_plot']
+    success_url = reverse_lazy('movies')
 
 
 class FilmDelete(DeleteView):
-    template_name = "film/delete_film.html";
-    model = film
-    success_url = reverse_lazy('movies');
+    template_name = "film/delete_film.html"
+    model = Film
+    success_url = reverse_lazy('movies')
 
 
-# #################### FILM VIEWS #####################################
+# FILM VIEWS
 class BannerCreate(CreateView):
-    template_name = "banner/add_banner.html";
+    template_name = "banner/add_banner.html"
     model = banner
-    fields = ['movie', 'url'];
-    success_url = reverse_lazy('banners');
+    fields = ['movie', 'url']
+    success_url = reverse_lazy('banners')
 
 
 class BannerUpdate(UpdateView):
-    template_name = "banner/add_banner.html";
+    template_name = "banner/add_banner.html"
     model = banner
-    fields = ['movie', 'url'];
-    success_url = reverse_lazy('banners');
+    fields = ['movie', 'url']
+    success_url = reverse_lazy('banners')
 
 
 class BannerDelete(DeleteView):
-    template_name = "banner/delete_banner.html";
-    model = banner;
-    success_url = reverse_lazy('banners');
+    template_name = "banner/delete_banner.html"
+    model = banner
+    success_url = reverse_lazy('banners')
 
 
 # #################### SHOW VIEWS #####################################
 class ShowCreate(CreateView):
-    template_name = "show/add_show.html";
+    template_name = "show/add_show.html"
     form_class: showForm
     model = show
-    fields = ['movie', 'start_date', 'end_date','price','showtime'];
-    success_url = reverse_lazy('shows');
+    fields = ['movie', 'start_date', 'end_date','price','showtime']
+    success_url = reverse_lazy('shows')
 
 
 class ShowUpdate(UpdateView):
-    template_name = "show/edit_show.html";
+    template_name = "show/edit_show.html"
     form_class: showForm
     model = show
-    fields = ['movie', 'start_date', 'end_date','price','showtime'];
-    success_url = reverse_lazy('shows');
+    fields = ['movie', 'start_date', 'end_date','price','showtime']
+    success_url = reverse_lazy('shows')
 
 
 class ShowDelete(DeleteView):
-    template_name = "show/delete_show.html";
-    model = show;
-    success_url = reverse_lazy('shows');
+    template_name = "show/delete_show.html"
+    model = show
+    success_url = reverse_lazy('shows')
 
 
 # ################ USERS
 def users(request):
-    users = Account.objects.filter(is_staff=False).values_list('username','email', named=True)
-    return render(request,"users.html",{'users': users})
+    users_list = Account.objects.filter(is_staff=False).values_list('username','email', named=True)
+    return render(request,"users.html",{'users': users_list})
 
 
 # ####################################### MOVIE VIEWS
 @user_passes_test(staff_required, login_url='/accounts/adminlogin')
 def movies(request):
-    movies = film.objects.filter().order_by('-id').values_list('id','movie_name','movie_genre','date_added','movie_lang','url','movie_year', named=True)
-    return render(request,"movies.html",{'film_list': movies})
+    movies_list = Film.objects.order_by('-id')
+    return render(request,"movies.html", {'film_list': movies_list})
 
 
 # ####################################### MOVIE VIEWS
@@ -174,13 +176,13 @@ def banners(request):
 # ############################################# SHOW VIEWS
 @user_passes_test(staff_required, login_url='/accounts/adminlogin')
 def shows(request):
-    shows = show.objects.all().order_by('-id')
-    return render(request,"shows.html",context={'shows':shows})
+    shows_list = show.objects.all().order_by('-id')
+    return render(request,"shows.html",context={'shows': shows_list})
 
 
 # @user_passes_test(staff_required, login_url='/accounts/adminlogin')
-def users(request):
+def Users(request):
     context = {}
-    users=Account.objects.filter(is_staff=False).all();
-    return render(request,"users.html",context={'users':users})
+    users_list=Account.objects.filter(is_staff=False).all()
+    return render(request,"users.html",context={'users': users_list})
 
